@@ -1,0 +1,48 @@
+{
+	"name": "Java",
+	"image": "mcr.microsoft.com/devcontainers/java:1-21",
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "21",
+			"installMaven": "false",
+			"mavenVersion": "3.8.6",
+			"installGradle": "false"
+		},
+		"ghcr.io/devcontainers/features/desktop-lite:1": {}
+	},
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"java.jdt.ls.java.home": "/docker-java-home"
+			},
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"vscjava.vscode-maven",
+				"vscjava.vscode-java-test",
+				"vscjava.vscode-java-debug",
+				"GitHub.github-vscode-theme"
+			]
+		}
+	},
+	"containerUser": "vscode",
+	"remoteUser": "vscode",
+	"forwardPorts": [
+		6080
+	],
+	"portsAttributes": {
+		"6080": {
+			"label": "desktop"
+		}
+	},
+	"runArgs": [
+		"--shm-size=1g"
+	],
+	//Set Terminal Prompt to $
+	"onCreateCommand": "echo '\nPS1=\"$ \"' >> ~/.bashrc",
+	"postCreateCommand": "chmod +x .devcontainer/install_chrome.sh && .devcontainer/install_chrome.sh",
+	"mounts": [
+		"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
+	]
+}
+// DevContainer Reference: https://code.visualstudio.com/docs/remote/devcontainerjson-reference
